@@ -9,19 +9,20 @@ package com.mycompany.proyectoii;
  * @author victo
  */
 public class NodoY {
-    private int x;//su coordenada en y
+    private int x;//su coordenada en x
+    private Vehiculo carro;
     private NodoY izquierda;
     private NodoY derecha;
     //cada nodoo Columna contiene una lista de fila 
     private NodoListaVertical columnas;
 
-    public NodoY(int x) {
+    public NodoY(int x,Vehiculo carro) {
         this.x = x;
+        this.carro = carro;
         //creamos una columna por cada nodofila
         this.columnas = new NodoListaVertical();
         this.izquierda = this.derecha = null;
     }
-
 
     public int getX() {
         return x;
@@ -29,6 +30,14 @@ public class NodoY {
 
     public void setX(int x) {
         this.x = x;
+    }
+
+    public Vehiculo getCarro() {
+        return carro;
+    }
+
+    public void setCarro(Vehiculo carro) {
+        this.carro = carro;
     }
 
     public NodoY getIzquierda() {
@@ -55,7 +64,7 @@ public class NodoY {
         this.columnas = columnas;
     }
 
-  
+
 
     
 }

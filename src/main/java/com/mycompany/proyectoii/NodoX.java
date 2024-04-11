@@ -9,19 +9,28 @@ package com.mycompany.proyectoii;
  * @author victo
  */
 public class NodoX {
+    private Vehiculo carro;
     private int y;//su coordenada en x
     private NodoX arriba;
     private NodoX abajo;
     //cada nodoo Columna contiene una lista de fila 
     private NodoListaHorizontal filas; 
 
-    public NodoX(int y) {
+    public NodoX(int y, Vehiculo carro) {
         this.y = y;
+        this.carro = carro;
         //creamos una columna por cada nodofila
         this.filas = new NodoListaHorizontal();
         this.arriba = this.abajo = null;
     }
 
+    public Vehiculo getCarro() {
+        return carro;
+    }
+
+    public void setCarro(Vehiculo carro) {
+        this.carro = carro;
+    }
 
     public int getY() {
         return y;
@@ -54,6 +63,8 @@ public class NodoX {
     public void setFilas(NodoListaHorizontal filas) {
         this.filas = filas;
     }
+
+
 
  
 
