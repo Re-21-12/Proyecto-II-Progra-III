@@ -8,101 +8,146 @@
  * @author jsalazar
  */
 public class Matriz {
-    
+
     public class MatrizOrtogonal {
-    
-    static class Vehicle {
-        String plate;
-        String color;
-        String brand;
-        String model;
-        String owner;
 
-        Vehicle(String plate, String color, String brand, String model, String owner) {
-            this.plate = plate;
-            this.color = color;
-            this.brand = brand;
-            this.model = model;
-            this.owner = owner;
+        static class Vehicle {
+
+            String plate;
+            String color;
+            String brand;
+            String model;
+            String owner;
+
+            Vehicle(String plate, String color, String brand, String model, String owner) {
+                this.plate = plate;
+                this.color = color;
+                this.brand = brand;
+                this.model = model;
+                this.owner = owner;
+            }
+        }
+
+        static class Node {
+
+            int x;
+            int y;
+            Vehicle vehicle;
+            Node left;
+            Node right;
+            Node up;
+            Node down;
+
+            Node(int x, int y, Vehicle vehicle) {
+                this.x = x;
+                this.y = y;
+                this.vehicle = vehicle;
+                this.left = null;
+                this.right = null;
+                this.up = null;
+                this.down = null;
+            }
+        }
+
+        static class NodeList {
+
+            Node head;
+
+            NodeList() {
+                this.head = null;
+            }
+
+            void insert(Node node) {
+                if (head == null) {
+                    head = node;
+                } else {
+                    Node current = head;
+                    while (current.right != null) {
+                        current = current.right;
+                    }
+                    current.right = node;
+                }
+            }
+        }
+
+        static class Matrix {
+
+            NodeList rows;
+            NodeList cols;
+
+            Matrix() {
+                this.rows = new NodeList();
+                this.cols = new NodeList();
+            }
+
+            void insert(Vehicle vehicle, int x, int y) {
+                Node newNode = new Node(x, y, vehicle);
+
+                // Insertar en la fila
+                Node rowNode = insertNodeInList(rows, newNode, true);
+
+                // Insertar en la columna
+                Node colNode = insertNodeInList(cols, newNode, false);
+
+                // Conectar nodos horizontal y verticalmente
+                connectNodes(newNode, rowNode, true);
+                connectNodes(newNode, colNode, false);
+            }
+
+            Node insertNodeInList(NodeList list, Node newNode, boolean horizontal) {
+                Node current = list.head;
+                Node prev = null;
+
+                while (current != null && ((horizontal && current.x < newNode.x) || (!horizontal && current.y < newNode.y))) {
+                    prev = current;
+                    current = current.right;
+                }
+
+                if (prev == null) {
+                    list.head = newNode;
+                } else {
+                    prev.right = newNode;
+                }
+
+                newNode.right = current;
+
+                return newNode;
+            }
+
+            void connectNodes(Node newNode, Node listNode, boolean horizontal) {
+                if (horizontal) {
+                    Node temp = listNode;
+                    while (temp != null && temp.y != newNode.y) {
+                        temp = temp.down;
+                    }
+                    if (temp != null) {
+                        newNode.up = temp;
+                        temp.down = newNode;
+                    }
+                } else {
+                    Node temp = listNode;
+                    while (temp != null && temp.x != newNode.x) {
+                        temp = temp.right;
+                    }
+                    if (temp != null) {
+                        newNode.left = temp;
+                        temp.right = newNode;
+                    }
+                }
+            }
+        }
+
+        public static void main(String[] args) {
+            Matrix matrix = new Matrix();
+
+            // Insertar un vehículo en la posición (5, 100)
+            Vehicle car = new Vehicle("ABC123", "Red", "Toyota", "Corolla", "John Doe");
+            matrix.insert(car, 5, 100);
+
+            // Insertar otro vehículo en la posición (3, 50)
+            Vehicle car2 = new Vehicle("XYZ456", "Blue", "Honda", "Civic", "Jane Doe");
+            matrix.insert(car2, 3, 50);
+
         }
     }
-
-    static class Node {
-        Vehicle vehicle;
-        Node right;
-        Node down;
-
-        Node(Vehicle vehicle) {
-            this.vehicle = vehicle;
-            this.right = null;
-            this.down = null;
-        }
-    }
-
-    static class Matrix {
-        Node topLeft;
-
-        void insert(Vehicle vehicle, int row, int col) {
-            Node newNode = new Node(vehicle);
-
-            // Mover a la fila y columna especificadas
-            Node rowNode = moveOrAddRow(row);
-            Node colNode = moveOrAddColumn(col);
-
-            // Insertar el nodo en la posición especificada
-            Node current = rowNode;
-            while (current.right != null && current.right.vehicle != null && current.right.vehicle.col < col) {
-                current = current.right;
-            }
-            newNode.right = current.right;
-            current.right = newNode;
-
-            current = colNode;
-            while (current.down != null && current.down.vehicle != null && current.down.vehicle.row < row) {
-                current = current.down;
-            }
-            newNode.down = current.down;
-            current.down = newNode;
-        }
-
-        Node moveOrAddRow(int row) {
-            Node temp = topLeft;
-            while (temp.down != null && temp.down.vehicle != null && temp.down.vehicle.row < row) {
-                temp = temp.down;
-            }
-            if (temp.down == null || temp.down.vehicle == null || temp.down.vehicle.row != row) {
-                Node newRow = new Node(null);
-                newRow.down = temp.down;
-                temp.down = newRow;
-                temp = newRow;
-            }
-            return temp;
-        }
-
-        Node moveOrAddColumn(int col) {
-            Node temp = topLeft;
-            while (temp.right != null && temp.right.vehicle != null && temp.right.vehicle.col < col) {
-                temp = temp.right;
-            }
-            if (temp.right == null || temp.right.vehicle == null || temp.right.vehicle.col != col) {
-                Node newCol = new Node(null);
-                newCol.right = temp.right;
-                temp.right = newCol;
-                temp = newCol;
-            }
-            return temp;
-        }
-    }
-
-    public static void main(String[] args) {
-        Matrix matrix = new Matrix();
-
-        // Insertar vehículo en la posición (5, 100)
-        Vehicle car = new Vehicle("ABC123", "Red", "Toyota", "Corolla", "John Doe");
-        matrix.insert(car, 5, 100);
-
-        // Imprimir la matriz ortogonal (no implementado en esta versión)
-        System.out.println("Vehicle inserted at position (5, 100).");
-    }
-    }}
-
+}
