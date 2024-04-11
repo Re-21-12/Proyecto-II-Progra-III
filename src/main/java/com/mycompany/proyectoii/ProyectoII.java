@@ -13,15 +13,18 @@ import java.util.Stack;
 public class ProyectoII {
 
     public static void main(String[] args) {
-
+        MatrizOrtogonal matrizDinamica = new MatrizOrtogonal();
         Vehiculo cocheFamiliar = new Vehiculo("ABC123", "Azul", "Sedan", "2020", "Juan Pérez");
-        Vehiculo cochesdfsd = new Vehiculo("XBA123", "Azul", "Sedan", "2020", "Juan Pérez");
-
+        matrizDinamica.insertarEnMatriz(3, 5, cocheFamiliar);
+        /*        
         NodoListaVertical listaVertical = new NodoListaVertical();
         NodoListaHorizontal listaHorizontal = new NodoListaHorizontal();
 
         NodosFilasIndice filas = new NodosFilasIndice();
         NodosColumnaIndice columnas = new NodosColumnaIndice();
+        
+        Vehiculo cocheFamiliar = new Vehiculo("ABC123", "Azul", "Sedan", "2020", "Juan Pérez");
+        Vehiculo cochesdfsd = new Vehiculo("XBA123", "Azul", "Sedan", "2020", "Juan Pérez");
 
         listaVertical.insertarEnVertical(new NodoOrtogonal(cocheFamiliar, 1, 0));
         listaVertical.insertarEnVertical(new NodoOrtogonal(cochesdfsd, 1, 1));
@@ -36,17 +39,18 @@ public class ProyectoII {
         columnas.insertarEnHorizontal(new NodoY(1));
         columnas.insertarEnHorizontal(new NodoY(6));
         columnas.insertarEnHorizontal(new NodoY(5));
-        
-       columnas.mostrarLista();
-       filas.mostrarLista();
+
+        columnas.mostrarLista();
+
+        //filas.buscarEnFilas(5);
+        filas.mostrarLista();
 
         //listaVertical.mostrarLista();
         //listaHorizontal.mostrarLista();
-
-        /*  Scanner entrada = new Scanner(System.in);
+         */
+ /*
+          Scanner entrada = new Scanner(System.in);
         NodoOrtogonal i;
-        Nodo nodosLaterales;
-        Nodo nodosCabeceras;
         //indicar seleccion
         Integer opcion;
         //Nodo raiz = new Nodo();   

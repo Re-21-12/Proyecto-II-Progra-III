@@ -22,6 +22,7 @@ public class NodoY {
         this.izquierda = this.derecha = null;
     }
 
+
     public int getX() {
         return x;
     }
@@ -53,6 +54,8 @@ public class NodoY {
     public void setColumnas(NodoListaVertical columnas) {
         this.columnas = columnas;
     }
+
+  
 
     
 }

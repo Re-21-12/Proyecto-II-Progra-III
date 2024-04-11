@@ -22,6 +22,7 @@ public class NodoX {
         this.arriba = this.abajo = null;
     }
 
+
     public int getY() {
         return y;
     }
@@ -53,6 +54,8 @@ public class NodoX {
     public void setFilas(NodoListaHorizontal filas) {
         this.filas = filas;
     }
+
+ 
 
     
 }

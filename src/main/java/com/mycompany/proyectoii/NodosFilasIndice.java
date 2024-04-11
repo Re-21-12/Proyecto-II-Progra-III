@@ -86,6 +86,32 @@ public class NodosFilasIndice {
         return cabeza; // retornamos la cabeza
     }
 
+    public NodoX buscarEnFilas(int y) {
+        NodoX actual = cabeza; // creamos un nodo auxiliar y lo inicializamos con la cabeza
+        while (actual != null) { // mientras no lleguemos al final de la lista
+            if (actual.getY() == y) {
+                System.out.println("Encontrado " + actual.getY()); // imprimimos el valor del nodo actual
+                return actual;
+            }
+            actual = actual.getAbajo(); // avanzamos al siguiente nodo
+        }
+        return null;
+    }
+
+    public boolean estaDisponibleEnX(int y) {
+        boolean bandera = false;
+        NodoX actual = cabeza; // creamos un nodo auxiliar y lo inicializamos con la cabeza
+        while (actual != null) { // mientras no lleguemos al final de la lista
+            if (actual.getY() == y) {
+                //System.out.println("Encontrado " + actual.getY()); // imprimimos el valor del nodo actual
+                bandera = true;
+                return bandera;
+            }
+            actual = actual.getAbajo(); // avanzamos al siguiente nodo
+        }
+        return bandera;
+    }
+
     // método para mostrar la lista
     public void mostrarLista() {
         NodoX actual = cabeza; // creamos un nodo auxiliar y lo inicializamos con la cabeza

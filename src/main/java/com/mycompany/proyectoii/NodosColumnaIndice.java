@@ -95,6 +95,32 @@ public class NodosColumnaIndice {
         return cabeza;
     }
 
+        public NodoY buscarEnColumnas(int x) {
+        NodoY actual = cabeza; // creamos un nodo auxiliar y lo inicializamos con la cabeza
+        while (actual != null) { // mientras no lleguemos al final de la lista
+            if (actual.getX() == x) {
+                System.out.println("Encontrado "+ actual.getX()); // imprimimos el valor del nodo actual
+                return actual;
+            }
+            actual = actual.getDerecha(); // avanzamos al siguiente nodo
+        }
+        return null;
+    }
+        public boolean estaDisponibleEnX(int x) {
+        boolean bandera = false;
+        NodoY actual = cabeza; // creamos un nodo auxiliar y lo inicializamos con la cabeza
+        while (actual != null) { // mientras no lleguemos al final de la lista
+            if (actual.getX() == x) {
+                //System.out.println("Encontrado " + actual.getY()); // imprimimos el valor del nodo actual
+                bandera = true;
+                return bandera;
+            }
+            actual = actual.getDerecha(); // avanzamos al siguiente nodo
+        }
+        return bandera;
+    }
+        
+        
     // creamos un método para mostrar los nodos de la lista horizontal
     public void mostrarLista() {
         NodoY actual = cabeza;
