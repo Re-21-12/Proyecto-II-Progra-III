@@ -177,25 +177,28 @@ public class NodosFilasIndice {
     }
 
     //placa, color,linea, modelo y propietario
-    public NodoX buscarEnFilasCarroPorPropiedad(String placa, String color, String linea, String propietario) {
+    public NodoX buscarEnFilasCarroPorPropiedad(String placa, String color, String linea, String propietario, String modelo) {
 
         NodoX actual = cabeza; // creamos un nodo auxiliar y lo inicializamos con la cabeza
         while (actual != null) { // mientras no lleguemos al final de la lista
             if (actual.getCarro().getColor().equalsIgnoreCase(color)) {
-                System.out.println("Encontrado " + actual.getY()); // imprimimos el valor del nodo actual
-                break;
+                return actual;
             }
             if (actual.getCarro().getPlaca().equalsIgnoreCase(placa)) {
-                System.out.println("Encontrado " + actual.getY()); // imprimimos el valor del nodo actual
-                break;
+                return actual;
+
             }
             if (actual.getCarro().getLinea().equalsIgnoreCase(linea)) {
-                System.out.println("Encontrado " + actual.getY()); // imprimimos el valor del nodo actual
-                break;
+                return actual;
+
             }
             if (actual.getCarro().getPropietario().equalsIgnoreCase(propietario)) {
-                System.out.println("Encontrado " + actual.getY()); // imprimimos el valor del nodo actual
-                break;
+                return actual;
+
+            }
+            if (actual.getCarro().getModelo().equalsIgnoreCase(modelo)) {
+                return actual;
+
             }
             actual = actual.getAbajo(); // avanzamos al siguiente nodo
         }

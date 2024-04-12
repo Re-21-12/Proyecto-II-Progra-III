@@ -36,6 +36,7 @@ public class NodosColumnaIndice {
             }
         }
     }
+
     public void eliminarEnHorizontal(NodoY nodoHorizontal) {
         if (cabeza == null) { // si la lista está vacía
             this.cabeza = this.cola = nodoHorizontal; // el nuevo nodo será la cabeza y la cola
@@ -170,9 +171,6 @@ public class NodosColumnaIndice {
         return cabeza;
     }
 
-    
-
-    
     public NodoY buscarEnColumnas(int x) {
         NodoY actual = cabeza; // creamos un nodo auxiliar y lo inicializamos con la cabeza
         while (actual != null) { // mientras no lleguemos al final de la lista
@@ -199,25 +197,29 @@ public class NodosColumnaIndice {
         return bandera;
     }
 
-    public NodoY buscarEnColumnasCarroPorPropiedad(String placa, String color, String linea, String propietario) {
+    public NodoY buscarEnColumnasCarroPorPropiedad(String placa, String color, String linea, String propietario,String modelo) {
 
         NodoY actual = cabeza; // creamos un nodo auxiliar y lo inicializamos con la cabeza
         while (actual != null) { // mientras no lleguemos al final de la lista
             if (actual.getCarro().getColor().equalsIgnoreCase(color)) {
-                System.out.println("Encontrado " + actual.getX()); // imprimimos el valor del nodo actual
-                break;
+                return actual;
             }
             if (actual.getCarro().getPlaca().equalsIgnoreCase(placa)) {
-                System.out.println("Encontrado " + actual.getX()); // imprimimos el valor del nodo actual
-                break;
+                return actual;
+
             }
             if (actual.getCarro().getLinea().equalsIgnoreCase(linea)) {
-                System.out.println("Encontrado " + actual.getX()); // imprimimos el valor del nodo actual
-                break;
+                return actual;
+
             }
             if (actual.getCarro().getPropietario().equalsIgnoreCase(propietario)) {
-                System.out.println("Encontrado " + actual.getX()); // imprimimos el valor del nodo actual
-                break;
+                return actual;
+
+            }
+            
+            if (actual.getCarro().getModelo().equalsIgnoreCase(modelo)) {
+                return actual;
+
             }
             actual = actual.getDerecha(); // avanzamos al siguiente nodo
         }
