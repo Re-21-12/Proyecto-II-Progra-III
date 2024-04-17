@@ -4,94 +4,105 @@
  */
 package com.mycompany.proyectoii;
 
-
+/**
+ *
+ * @author victo
+ */
 public class MatrizOrtogonal {
 
-    private NodosFilasIndice filas; // Declara una variable privada filas del tipo NodosFilasIndice
-    private NodosColumnaIndice columnas; // Declara una variable privada columnas del tipo NodosColumnaIndice
+    private NodosFilasIndice filas;
+    private NodosColumnaIndice columnas;
 
-    public MatrizOrtogonal() { // Constructor de la clase MatrizOrtogonal
-        filas = new NodosFilasIndice(); // Inicializa la variable filas con una nueva instancia de NodosFilasIndice
-        columnas = new NodosColumnaIndice(); // Inicializa la variable columnas con una nueva instancia de NodosColumnaIndice
+    public MatrizOrtogonal() {
+        filas = new NodosFilasIndice();
+        columnas = new NodosColumnaIndice();
     }
 
-    public void insertarEnMatriz(int x, int y, Vehiculo carro) { // Método para insertar un vehículo en la matriz ortogonal
-        NodoX tempFila; // Declara una variable tempFila del tipo NodoX
-        NodoY tempColumna; // Declara una variable tempColumna del tipo NodoY
-        NodoOrtogonal _nodoOrtogonal = new NodoOrtogonal(carro, x, y); // Crea un nuevo NodoOrtogonal con el vehículo y las coordenadas especificadas
-        if (filas.estaDisponibleEnX(y) == false) { // Verifica si la fila en la posición y está disponible
-            NodoX nodoX = new NodoX(y, carro); // Crea un nuevo NodoX con la coordenada y y el vehículo especificados
-            filas.insertarEnVertical(nodoX); // Inserta el nuevo NodoX en la lista vertical de filas
+    public void insertarEnMatriz(int x, int y, Vehiculo carro) {
+        //Si me trae falso es por que esta vacioo
+        NodoX tempFila;
+        NodoY tempColumna;
+        NodoOrtogonal _nodoOrtogonal = new NodoOrtogonal(carro, x, y);
+        if (filas.estaDisponibleEnX(y) == false) {
+            NodoX nodoX = new NodoX(y, carro);
+            filas.insertarEnVertical(nodoX);
         }
-        if (columnas.estaDisponibleEnX(x) == false) { // Verifica si la columna en la posición x está disponible
-            NodoY nodoY = new NodoY(x, carro); // Crea un nuevo NodoY con la coordenada x y el vehículo especificados
-            columnas.insertarEnHorizontal(nodoY); // Inserta el nuevo NodoY en la lista horizontal de columnas
+        if (columnas.estaDisponibleEnX(x) == false) {
+            NodoY nodoY = new NodoY(x, carro);
+            columnas.insertarEnHorizontal(nodoY);
         }
-        tempFila = filas.buscarEnFilas(y); // Busca el NodoX correspondiente a la coordenada y
-        tempColumna = columnas.buscarEnColumnas(x); // Busca el NodoY correspondiente a la coordenada x
+        tempFila = filas.buscarEnFilas(y);
+        tempColumna = columnas.buscarEnColumnas(x);
 
-        tempFila.getFilas().insertarEnHorizontal(_nodoOrtogonal); // Inserta el nuevo NodoOrtogonal en la lista horizontal del NodoX encontrado
-        tempColumna.getColumnas().insertarEnVertical(_nodoOrtogonal); // Inserta el nuevo NodoOrtogonal en la lista vertical del NodoY encontrado
+        tempFila.getFilas().insertarEnHorizontal(_nodoOrtogonal);
+        tempColumna.getColumnas().insertarEnVertical(_nodoOrtogonal);
     }
 
     //falta implementar
-    public void eliminarEnMatriz(int x, int y) { // Método para eliminar un vehículo de la matriz ortogonal
-        NodoX tempFila; // Declara una variable tempFila del tipo NodoX
-        NodoY tempColumna; // Declara una variable tempColumna del tipo NodoY
-        tempFila = filas.buscarEnFilas(y); // Busca el NodoX correspondiente a la coordenada y
-        tempColumna = columnas.buscarEnColumnas(x); // Busca el NodoY correspondiente a la coordenada x
-        if (tempFila == null || tempColumna == null) { // Verifica si no se encontró el vehículo en las coordenadas especificadas
-            System.out.println("No se ha encontrado el dato"); // Imprime un mensaje indicando que no se encontró el dato
+    public void eliminarEnMatriz(int x, int y) {
+        //Si me trae falso es por que esta vacioo
+        NodoX tempFila;
+        NodoY tempColumna;
+        tempFila = filas.buscarEnFilas(y);
+        tempColumna = columnas.buscarEnColumnas(x);
+        if (tempFila == null || tempColumna == null) {
+            System.out.println("No se ha encontrado el dato");
         } else {
-            System.out.println("Se ha eliminado el vehiculo"); // Imprime un mensaje indicando que se ha eliminado el vehículo
-            System.out.println(tempFila.getCarro()); // Imprime el vehículo contenido en el NodoX encontrado
+            System.out.println("Se ha eliminado el vehiculo");
+            System.out.println(tempFila.getCarro());
         }
 
-        filas.eliminarEnVertical(tempFila); // Elimina el NodoX correspondiente de la lista vertical de filas
-        columnas.eliminarEnHorizontal(tempColumna); // Elimina el NodoY correspondiente de la lista horizontal de columnas
+        filas.eliminarEnVertical(tempFila);
+        columnas.eliminarEnHorizontal(tempColumna);
     }
 
-    public void eliminarEnMatrizPorPropiedad(String placa, String color, String linea, String propietario, String modelo) { // Método para eliminar un vehículo de la matriz ortogonal por sus propiedades
-        NodoX tempFila; // Declara una variable tempFila del tipo NodoX
-        NodoY tempColumna; // Declara una variable tempColumna del tipo NodoY
-        tempFila = filas.buscarEnFilasCarroPorPropiedad(placa, color, linea, propietario, modelo); // Busca el NodoX correspondiente al vehículo por sus propiedades
-        tempColumna = columnas.buscarEnColumnasCarroPorPropiedad(placa, color, linea, propietario, modelo); // Busca el NodoY correspondiente al vehículo por sus propiedades
-        if (tempFila == null || tempColumna == null) { // Verifica si no se encontró el vehículo en las coordenadas especificadas
-            System.out.println("No se ha encontrado el dato"); // Imprime un mensaje indicando que no se encontró el dato
+    public void eliminarEnMatrizPorPropiedad(String placa, String color, String linea, String propietario, String modelo) {
+        //Si me trae falso es por que esta vacioo
+        NodoX tempFila;
+        NodoY tempColumna;
+        tempFila = filas.buscarEnFilasCarroPorPropiedad(placa, color, linea, propietario, modelo);
+        tempColumna = columnas.buscarEnColumnasCarroPorPropiedad(placa, color, linea, propietario, modelo);
+        if (tempFila == null || tempColumna == null) {
+            System.out.println("No se ha encontrado el dato");
         } else {
-            System.out.println("Se ha eliminado el vehiculo"); // Imprime un mensaje indicando que se ha eliminado el vehículo
-            System.out.println(tempFila.getCarro()); // Imprime el vehículo contenido en el NodoX encontrado
+            System.out.println("Se ha eliminado el vehiculo");
+            System.out.println(tempFila.getCarro());
         }
-        filas.eliminarEnVertical(tempFila); // Elimina el NodoX correspondiente de la lista vertical de filas
-        columnas.eliminarEnHorizontal(tempColumna); // Elimina el NodoY correspondiente de la lista horizontal de columnas
+        filas.eliminarEnVertical(tempFila);
+        columnas.eliminarEnHorizontal(tempColumna);
     }
 
-    public void buscarEnMatriz(int x, int y) { // Método para buscar un vehículo en la matriz ortogonal por sus coordenadas
-        NodoX carroEnX = filas.buscarEnFilas(y); // Busca el NodoX correspondiente a la coordenada y
-        NodoY carroEnY = columnas.buscarEnColumnas(x); // Busca el NodoY correspondiente a la coordenada x
-        if (carroEnX != null && carroEnY != null) { // Verifica si se encontró el vehículo en las coordenadas especificadas
-            System.out.println("Se ha encontrado el vehiculo"); // Imprime un mensaje indicando que se ha encontrado el vehículo
-            System.out.println(carroEnX.getCarro()); // Imprime el vehículo contenido en el NodoX encontrado
+    public void buscarEnMatriz(int x, int y) {
+        //Si me trae falso es por que esta vacioo
+        NodoX carroEnX = filas.buscarEnFilas(y);//->private NodosFilasIndice filas;
+        NodoY carroEnY = columnas.buscarEnColumnas(x);//->private NodosColumnaIndice columnas;
+        if (carroEnX != null && carroEnY != null) {
+            System.out.println("Se ha encontrado el vehiculo");
+            System.out.println(carroEnX.getCarro());
         } else {
-            System.out.println("No se ha encontrado el vehiculo"); // Imprime un mensaje indicando que no se ha encontrado el vehículo
+            System.out.println("No se ha encontrado el vehiculo");
+
         }
     }
 
-    public void buscarEnMatrizPorCarro(String placa, String color, String linea, String propietario, String modelo) { // Método para buscar un vehículo en la matriz ortogonal por sus propiedades
-        NodoX carroEnX = filas.buscarEnFilasCarroPorPropiedad(placa, color, linea, propietario, modelo); // Busca el NodoX correspondiente al vehículo por sus propiedades
-        NodoY carroEnY = columnas.buscarEnColumnasCarroPorPropiedad(placa, color, linea, propietario, modelo); // Busca el NodoY correspondiente al vehículo por sus propiedades
-        if (carroEnX != null && carroEnY != null) { // Verifica si se encontró el vehículo en las coordenadas especificadas
-            System.out.println("Se ha encontrado el vehiculo"); // Imprime un mensaje indicando que se ha encontrado el vehículo
-            System.out.println(carroEnX.getCarro()); // Imprime el vehículo contenido en el NodoX encontrado
+    public void buscarEnMatrizPorCarro(String placa, String color, String linea, String propietario, String modelo) {
+        //Si me trae falso es por que esta vacioo
+        NodoX carroEnX = filas.buscarEnFilasCarroPorPropiedad(placa, color, linea, propietario, modelo);//->private NodosFilasIndice filas;
+        NodoY carroEnY = columnas.buscarEnColumnasCarroPorPropiedad(placa, color, linea, propietario, modelo);//->private NodosColumnaIndice columnas;
+        if (carroEnX != null && carroEnY != null) {
+            System.out.println("Se ha encontrado el vehiculo");
+            System.out.println(carroEnX.getCarro());
         } else {
-            System.out.println("No se ha encontrado el vehiculo"); // Imprime un mensaje indicando que no se ha encontrado el vehículo
+            System.out.println("No se ha encontrado el vehiculo");
+
         }
 
     }
 
-    public void mostrarMatriz() { // Método para mostrar la matriz ortogonal
-        columnas.mostrarLista(); // Muestra la lista horizontal de columnas
-        filas.mostrarLista(); // Muestra la lista vertical de filas
+    public void mostrarMatriz() {
+        //Si me trae falso es por que esta vacioo
+        columnas.mostrarLista();
+        filas.mostrarLista();
     }
 
 }
