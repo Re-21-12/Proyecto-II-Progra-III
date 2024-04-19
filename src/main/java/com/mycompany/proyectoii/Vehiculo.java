@@ -4,7 +4,10 @@
  */
 package com.mycompany.proyectoii;
 
-
+/**
+ *
+ * @author victo
+ */
 public class Vehiculo {
     private String placa;
     private String color;

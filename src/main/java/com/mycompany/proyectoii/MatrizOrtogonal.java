@@ -4,7 +4,6 @@
  */
 package com.mycompany.proyectoii;
 
-
 public class MatrizOrtogonal {
 
     private NodosFilasIndice filas; // Declara una variable privada filas del tipo NodosFilasIndice
@@ -32,6 +31,8 @@ public class MatrizOrtogonal {
 
         tempFila.getFilas().insertarEnHorizontal(_nodoOrtogonal); // Inserta el nuevo NodoOrtogonal en la lista horizontal del NodoX encontrado
         tempColumna.getColumnas().insertarEnVertical(_nodoOrtogonal); // Inserta el nuevo NodoOrtogonal en la lista vertical del NodoY encontrado
+        tempFila.getFilas().mostrarLista();
+        tempColumna.getColumnas().mostrarLista();
     }
 
     //falta implementar
@@ -46,7 +47,6 @@ public class MatrizOrtogonal {
             System.out.println("Se ha eliminado el vehiculo"); // Imprime un mensaje indicando que se ha eliminado el vehículo
             System.out.println(tempFila.getCarro()); // Imprime el vehículo contenido en el NodoX encontrado
         }
-
         filas.eliminarEnVertical(tempFila); // Elimina el NodoX correspondiente de la lista vertical de filas
         columnas.eliminarEnHorizontal(tempColumna); // Elimina el NodoY correspondiente de la lista horizontal de columnas
     }
@@ -69,6 +69,7 @@ public class MatrizOrtogonal {
     public void buscarEnMatriz(int x, int y) { // Método para buscar un vehículo en la matriz ortogonal por sus coordenadas
         NodoX carroEnX = filas.buscarEnFilas(y); // Busca el NodoX correspondiente a la coordenada y
         NodoY carroEnY = columnas.buscarEnColumnas(x); // Busca el NodoY correspondiente a la coordenada x
+
         if (carroEnX != null && carroEnY != null) { // Verifica si se encontró el vehículo en las coordenadas especificadas
             System.out.println("Se ha encontrado el vehiculo"); // Imprime un mensaje indicando que se ha encontrado el vehículo
             System.out.println(carroEnX.getCarro()); // Imprime el vehículo contenido en el NodoX encontrado
@@ -93,5 +94,14 @@ public class MatrizOrtogonal {
         columnas.mostrarLista(); // Muestra la lista horizontal de columnas
         filas.mostrarLista(); // Muestra la lista vertical de filas
     }
-
+    /*  public void probar(int x, int y) {
+        int c = 0;
+        for (int j = 0; j <= y; j++) {
+            for (int i = 0; i <= x; i++) {
+                insertarEnMatriz(j, i, new Vehiculo(String.valueOf(c), String.valueOf(c), String.valueOf(c), String.valueOf(c), String.valueOf(c)));
+                c++;
+            }
+        }
+    }
+     */
 }

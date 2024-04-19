@@ -7,24 +7,32 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.util.Random;
 
-
+/**
+ *
+ * @author victo
+ */
 public class ProyectoII {
 
     public static void main(String[] args) {
-        MatrizOrtogonal matrizDinamica = new MatrizOrtogonal(); // Creación de una nueva matriz ortogonal
+        MatrizOrtogonal matrizDinamica = new MatrizOrtogonal();
 
-        matrizDinamica.mostrarMatriz(); // Mostrar la matriz por consola
+        matrizDinamica.mostrarMatriz();
 
-        // Creación de un objeto Random para generar números aleatorios
+        //random
         Random random = new Random();
-        Scanner entrada = new Scanner(System.in); // Creación de un objeto Scanner para leer la entrada del usuario
-        Integer opcion; // Variable para almacenar la opción seleccionada por el usuario
-        int x = 0; // Coordenada X del vehículo
-        int y = 0; // Coordenada Y del vehículo
-        String aleatorio; // Opción para ingresar las coordenadas de manera aleatoria
-        String continuar; // Variable para indicar si se desea continuar con la operación
+        Scanner entrada = new Scanner(System.in);
+        //indicar seleccion
+        Integer opcion;
+        //coordenadas vehiculo
+        int x = 0;
+        int y = 0;
+        //ingresar aleatorio        
+        String aleatorio;
+        //continuar o no 
+        String continuar;
 
-        String porCoordenada; // Variable para indicar si se desea buscar o eliminar por coordenadas
+        //en coordenadas
+        String porCoordenada;
         System.out.println("Bienvenido a Proyecto 2!");
 
         do {
@@ -33,167 +41,167 @@ public class ProyectoII {
             System.out.println("[2]\t Buscar un carro");
             System.out.println("[3]\t Eliminar un carro");
             System.out.println("[0]\t Salir");
-            opcion = entrada.nextInt(); // Leer la opción seleccionada por el usuario
+            opcion = entrada.nextInt();
             continuar = "";
             switch (opcion) {
-                case 1: // Opción para ingresar un nuevo carro
+                case 1:
                     entrada.nextLine();
                     System.out.println("Ingrese un carro nuevo:");
                     do {
                         System.out.println("Desea ingresar de manera aleatoria las posiciones?: [s/N]");
-                        aleatorio = entrada.nextLine(); // Leer la opción para ingresar coordenadas aleatorias
-                        if (aleatorio.equalsIgnoreCase("s")) { // Si se elige ingresar aleatoriamente
-                            x = random.nextInt(1000); // Generar una coordenada X aleatoria
-                            y = random.nextInt(1000); // Generar una coordenada Y aleatoria
-                        } else if (aleatorio.equalsIgnoreCase("n")) { // Si se elige ingresar manualmente
+                        aleatorio = entrada.nextLine();
+                        if (aleatorio.equalsIgnoreCase("s")) {
+                            x = random.nextInt(1000);
+                            y = random.nextInt(1000);
+                        } else if (aleatorio.equalsIgnoreCase("n")) {
                             System.out.println("Ingrese una posicion en X para el vehiculo");
-                            x = entrada.nextInt(); // Leer la coordenada X
+                            x = entrada.nextInt();
                             System.out.println("Ingrese una posicion en Y para el vehiculo");
-                            y = entrada.nextInt(); // Leer la coordenada Y
+                            y = entrada.nextInt();
                         }
-                        Vehiculo carro = ingresarDatosCarro(); // Llamar a la función para ingresar los datos del carro
-                        matrizDinamica.insertarEnMatriz(x, y, carro); // Insertar el carro en la matriz
-                        matrizDinamica.mostrarMatriz(); // Mostrar la matriz actualizada
+                        Vehiculo carro = ingresarDatosCarro();
+                        matrizDinamica.insertarEnMatriz(x, y, carro);
+                        matrizDinamica.mostrarMatriz();
                         System.out.println("Desea ingresar otro carro [s/n]");
-                        continuar = entrada.nextLine(); // Leer si se desea continuar ingresando carros
-                    } while (continuar.equalsIgnoreCase("s")); // Repetir mientras se desee continuar
+                        continuar = entrada.nextLine();
+                    } while (continuar.equalsIgnoreCase("s"));
                     break;
-                case 2: // Opción para buscar un carro
+                case 2:
                     entrada.nextLine();
                     System.out.println("Bienvenido a busqueda de carro ");
                     do {
                         System.out.println("Desea buscar por coordenadas? [s/N]");
-                        porCoordenada = entrada.nextLine(); // Leer la opción para buscar por coordenadas
-                        if (porCoordenada.equalsIgnoreCase("s")) { // Si se elige buscar por coordenadas
+                        porCoordenada = entrada.nextLine();
+                        if (porCoordenada.equalsIgnoreCase("s")) {
                             System.out.println("Ingrese una posicion en X para el vehiculo");
-                            x = entrada.nextInt(); // Leer la coordenada X
+                            x = entrada.nextInt();
                             System.out.println("Ingrese una posicion en Y para el vehiculo");
-                            y = entrada.nextInt(); // Leer la coordenada Y
-                            matrizDinamica.buscarEnMatriz(x, y); // Buscar el carro en la matriz por coordenadas
-                        } else if (porCoordenada.equalsIgnoreCase("n")) { // Si se elige buscar por propiedades
-                            buscarDatosCarro(matrizDinamica); // Llamar a la función para buscar por propiedades
+                            y = entrada.nextInt();
+                            matrizDinamica.buscarEnMatriz(x, y);
+                        } else if (porCoordenada.equalsIgnoreCase("n")) {
+                            buscarDatosCarro(matrizDinamica);
                         }
                         System.out.println("Desea buscar otro carro [s/n]");
-                        continuar = entrada.nextLine(); // Leer si se desea continuar buscando carros
-                    } while (continuar.equalsIgnoreCase("s")); // Repetir mientras se desee continuar
+                        continuar = entrada.nextLine();
+                    } while (continuar.equalsIgnoreCase("s"));
                     break;
-                case 3: // Opción para eliminar un carro
+                case 3:
                     entrada.nextLine();
                     System.out.println("Bienvenido a eliminar carro");
                     do {
                         System.out.println("Desea eliminar por coordenadas? [s/N]");
-                        porCoordenada = entrada.nextLine(); // Leer la opción para eliminar por coordenadas
-                        if (porCoordenada.equalsIgnoreCase("s")) { // Si se elige eliminar por coordenadas
+                        porCoordenada = entrada.nextLine();
+                        if (porCoordenada.equalsIgnoreCase("s")) {
                             System.out.println("Ingrese una posicion en X para el vehiculo");
-                            x = entrada.nextInt(); // Leer la coordenada X
+                            x = entrada.nextInt();
                             System.out.println("Ingrese una posicion en Y para el vehiculo");
-                            y = entrada.nextInt(); // Leer la coordenada Y
-                            matrizDinamica.eliminarEnMatriz(x, y); // Eliminar el carro en la matriz por coordenadas
-                        } else if (porCoordenada.equalsIgnoreCase("n")) { // Si se elige eliminar por propiedades
-                            eliminarDatosCarroEnMatriz(matrizDinamica); // Llamar a la función para eliminar por propiedades
+                            y = entrada.nextInt();
+                            matrizDinamica.eliminarEnMatriz(x, y);
+                        } else if (porCoordenada.equalsIgnoreCase("n")) {
+                            eliminarDatosCarroEnMatriz(matrizDinamica);
                         }
                         System.out.println("Desea buscar otro carro [s/n]");
-                        continuar = entrada.nextLine(); // Leer si se desea continuar eliminando carros
-                    } while (continuar.equalsIgnoreCase("s")); // Repetir mientras se desee continuar
+                        continuar = entrada.nextLine();
+                    } while (continuar.equalsIgnoreCase("s"));
                     break;
                 default:
                     System.out.println("Por favor ingrese una opcion disponible");
             }
-        } while (opcion != 0); // Repetir hasta que se seleccione la opción de salir
+        } while (opcion != 0);
     }
 
     public static Vehiculo ingresarDatosCarro() {
-        Scanner entrada = new Scanner(System.in); // Creación de un objeto Scanner para leer la entrada del usuario
+        Scanner entrada = new Scanner(System.in);
         System.out.println("Ingrese una placa para el vehiculo");
-        String placa = entrada.nextLine(); // Leer la placa del vehículo
+        String placa = entrada.nextLine();
         System.out.println("Ingrese un color para el vehiculo");
-        String color = entrada.nextLine(); // Leer el color del vehículo
+        String color = entrada.nextLine();
         System.out.println("Ingrese una linea para el vehiculo");
-        String linea = entrada.nextLine(); // Leer la linea del vehículo
+        String linea = entrada.nextLine();
         System.out.println("Ingrese el nombre del propietario para el vehiculo");
-        String propietario = entrada.nextLine(); // Leer el nombre del propietario del vehículo
+        String propietario = entrada.nextLine();
         System.out.println("Ingrese un  modelo para el vehiculo");
-        String modelo = entrada.nextLine(); // Leer el modelo del vehículo
-        Vehiculo carro = new Vehiculo(placa, color, linea, modelo, propietario); // Crear un nuevo objeto Vehiculo con los datos ingresados
-        return carro; // Retornar el objeto Vehiculo creado
+        String modelo = entrada.nextLine();
+        Vehiculo carro = new Vehiculo(placa, color, linea, modelo, propietario);
+        return carro;
     }
 
     public static void buscarDatosCarro(MatrizOrtogonal matrizDinamica) {
-        Scanner entrada = new Scanner(System.in); // Creación de un objeto Scanner para leer la entrada del usuario
-        int opcion = 0; // Variable para almacenar la opción seleccionada por el usuario
+        Scanner entrada = new Scanner(System.in);
+        int opcion = 0;
         System.out.println("Seleccione una opcion para buscar");
         System.out.println("[1] Busqueda por placa");
         System.out.println("[2] Busqueda por color");
         System.out.println("[3] Busqueda por linea");
         System.out.println("[4] Busqueda por modelo");
         System.out.println("[5] Busqueda por nombre del propietario");
-        opcion = entrada.nextInt(); // Leer la opción seleccionada por el usuario
-        entrada.nextLine(); // Consumir el salto de línea pendiente
+        opcion = entrada.nextInt();
+        entrada.nextLine();
         switch (opcion) {
-            case 1: // Opción para buscar por placa
+            case 1:
                 System.out.println("Ingrese una placa para buscar el vehiculo");
-                String placa = entrada.nextLine(); // Leer la placa del vehículo a buscar
-                matrizDinamica.buscarEnMatrizPorCarro(placa, "", "", "", ""); // Buscar el vehículo en la matriz por placa
+                String placa = entrada.nextLine();
+                matrizDinamica.buscarEnMatrizPorCarro(placa, "", "", "", "");
                 break;
-            case 2: // Opción para buscar por color
+            case 2:
                 System.out.println("Ingrese un color para buscar el vehiculo");
-                String color = entrada.nextLine(); // Leer el color del vehículo a buscar
-                matrizDinamica.buscarEnMatrizPorCarro("", color, "", "", ""); // Buscar el vehículo en la matriz por color
+                String color = entrada.nextLine();
+                matrizDinamica.buscarEnMatrizPorCarro("", color, "", "", "");
                 break;
-            case 3: // Opción para buscar por linea
+            case 3:
                 System.out.println("Ingrese una linea para buscar el vehiculo");
-                String linea = entrada.nextLine(); // Leer la linea del vehículo a buscar
-                matrizDinamica.buscarEnMatrizPorCarro("", "", linea, "", ""); // Buscar el vehículo en la matriz por linea
+                String linea = entrada.nextLine();
+                matrizDinamica.buscarEnMatrizPorCarro("", "", linea, "", "");
                 break;
-            case 4: // Opción para buscar por modelo
+            case 4:
                 System.out.println("Ingrese un  modelo para el vehiculo");
-                String modelo = entrada.nextLine(); // Leer el modelo del vehículo a buscar
-                matrizDinamica.buscarEnMatrizPorCarro("", "", "", "", modelo); // Buscar el vehículo en la matriz por modelo
+                String modelo = entrada.nextLine();
+                matrizDinamica.buscarEnMatrizPorCarro("", "", "", "", modelo);
                 break;
-            case 5: // Opción para buscar por nombre del propietario
+            case 5:
                 System.out.println("Ingrese el nombre del propietario para buscar el vehiculo");
-                String propietario = entrada.nextLine(); // Leer el nombre del propietario del vehículo a buscar
-                matrizDinamica.buscarEnMatrizPorCarro("", "", "", propietario, ""); // Buscar el vehículo en la matriz por propietario
+                String propietario = entrada.nextLine();
+                matrizDinamica.buscarEnMatrizPorCarro("", "", "", propietario, "");
                 break;
         }
     }
 
     public static void eliminarDatosCarroEnMatriz(MatrizOrtogonal matrizDinamica) {
-        Scanner entrada = new Scanner(System.in); // Creación de un objeto Scanner para leer la entrada del usuario
-        int opcion = 0; // Variable para almacenar la opción seleccionada por el usuario
+        Scanner entrada = new Scanner(System.in);
+        int opcion = 0;
         System.out.println("Seleccione una opcion para buscar");
         System.out.println("[1] Eliminar por placa");
         System.out.println("[2] Eliminar por color");
         System.out.println("[3] Eliminar por linea");
         System.out.println("[4] Eliminar por modelo");
         System.out.println("[5] Eliminar por nombre del propietario");
-        opcion = entrada.nextInt(); // Leer la opción seleccionada por el usuario
-        entrada.nextLine(); // Consumir el salto de línea pendiente
+        opcion = entrada.nextInt();
+        entrada.nextLine();
         switch (opcion) {
-            case 1: // Opción para eliminar por placa
+            case 1:
                 System.out.println("Ingrese una placa para buscar el vehiculo");
-                String placa = entrada.nextLine(); // Leer la placa del vehículo a eliminar
-                matrizDinamica.eliminarEnMatrizPorPropiedad(placa, "", "", "", ""); // Eliminar el vehículo en la matriz por placa
+                String placa = entrada.nextLine();
+                matrizDinamica.eliminarEnMatrizPorPropiedad(placa, "", "", "", "");
                 break;
-            case 2: // Opción para eliminar por color
+            case 2:
                 System.out.println("Ingrese un color para buscar el vehiculo");
-                String color = entrada.nextLine(); // Leer el color del vehículo a eliminar
-                matrizDinamica.eliminarEnMatrizPorPropiedad("", color, "", "", ""); // Eliminar el vehículo en la matriz por color
+                String color = entrada.nextLine();
+                matrizDinamica.eliminarEnMatrizPorPropiedad("", color, "", "", "");
                 break;
-            case 3: // Opción para eliminar por linea
+            case 3:
                 System.out.println("Ingrese una linea para buscar el vehiculo");
-                String linea = entrada.nextLine(); // Leer la linea del vehículo a eliminar
-                matrizDinamica.eliminarEnMatrizPorPropiedad("", "", linea, "", ""); // Eliminar el vehículo en la matriz por linea
+                String linea = entrada.nextLine();
+                matrizDinamica.eliminarEnMatrizPorPropiedad("", "", linea, "", "");
                 break;
-            case 4: // Opción para eliminar por modelo
+            case 4:
                 System.out.println("Ingrese un  modelo para el vehiculo");
-                String modelo = entrada.nextLine(); // Leer el modelo del vehículo a eliminar
-                matrizDinamica.eliminarEnMatrizPorPropiedad("", "", "", "", modelo); // Eliminar el vehículo en la matriz por modelo
+                String modelo = entrada.nextLine();
+                matrizDinamica.eliminarEnMatrizPorPropiedad("", "", "", "", modelo);
                 break;
-            case 5: // Opción para eliminar por nombre del propietario
+            case 5:
                 System.out.println("Ingrese el nombre del propietario para buscar el vehiculo");
-                String propietario = entrada.nextLine(); // Leer el nombre del propietario del vehículo a eliminar
-                matrizDinamica.eliminarEnMatrizPorPropiedad("", "", "", propietario, ""); // Eliminar el vehículo en la matriz por propietario
+                String propietario = entrada.nextLine();
+                matrizDinamica.eliminarEnMatrizPorPropiedad("", "", "", propietario, "");
                 break;
         }
     }
